@@ -1,6 +1,6 @@
 # Frontend Mentor - Product preview card component solution
 
-This is a solution to the [Product preview card component challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-preview-card-component-GO7UmttRfa). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Product preview card component challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-preview-card-component-GO7UmttRfa). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -29,15 +29,8 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![Desktop](./design/results-desktop.png)
+![Desktop](./design/results-mobile.png)
 
 ### Links
 
@@ -46,66 +39,77 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ## My process
 
+Planned process:
+
+1. Set up git local repository, and github repository and make initial commit and push
+2. Review README and style-guide
+3. Decide on approach:
+    - Start with mobile first designing for 320px width screens
+    - Looking at the design and note anything that may impact html structure
+      - Mobile & desktop design suggests display: flex will work well to switch the image & text from column to row alignment
+      - (will need to test whether to use flex-wrap or a media-query for the transition)
+      - I will need to decide on how to handle switching the image. I guess this might need a media query.
+    - Create the HTML structure based on mobile design, check / adjust anything for desktop
+    - Start to build out the CSS
+      - I don't see anything unusual in the design. I think flex can be used for alignment of all the text and buttons.
+4. Let's try to build it and see what I learn!
+
+I will add adjustments and learnings in 'what I learned'
+
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- Focus on mobile first
+- Focus on flexbox
+- Try to utilise the following well
+  - CSS variables
+  - Relative unit of measures
+  - Logical properties e.g. `max-inline-size` and `padding-block`
+  - Block element method naming
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+I had a hard time trying to make the mobile and desk top designs align the spec while keeping the design naturally responsive without adding a lot of adjustments to the @media queries.
 
-To see how you can add code snippets, see below:
+For example one of the widest content elements is the product description. On the two designs the longest lines are:
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+- Mobile: `Polge, Perfumer-Creator for the House of` around 41 chars + padding
+- Desktop: `Olivier Polge, Perfumer-Creator` around 31 chars + padding
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+My approach was
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+Mobile first:
+
+1) Set the overall component width to 90% of container i.e. `max-inline-size: 90%`
+2) Use flex throughout. Noteworthy the component starts on flex-column with children for images & copy container
+3) Set my media query at a generous 48rem; small screen design for phones, small tablets etc.
+4) To stop the content & image expanding too much adjust component width to `max-inline-size: min(41ch, 90%);`
+
+Then moving to the desktop design within the min-width 48rem media query I have:
+
+1) Adjust the component `max-inline-size: 90%` to remove the 41ch restriction
+2) Change component flex direction to row. Set wrap to nowrap to avoid unwanted auto wrapping to column
+3) Set my max widths on the copy container and image (as opposed to the overall component)
+    - I felt this was more logical as I calculated the width based on copy text as 31ch
+    - Hide the mobile image, show the desktop image.
+
+With this approach the overall design works, but the content width of the text is slightly off vs. the specs. I started to adjust padding between the main design and media query, but I feel like hard coding many settings moves away from the point of a responsive design.
+
+I also tried to make this design without any media queries. It's possible with flexbox and content widths to auto wrap/unwrap between desktop and mobile sizes. However it seems media query is the only way to unhide one image and hide the other. If you rely on auto wrap/unwrap and a media query it's a bit tricky to time them to transition at exactly the same time. It is possible to calculate it out. But I felt again, this is is a bit 'hardcoded' and if you are going to have a transition of the image it's better to put the flex direction change in the same query and have it all controlled via the same mechanism.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+I will probably subscribe and check the figma specs to see if there was a better indication of desired widths between mobile and desktop.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+I found the provided reference in the introduction to the exercise very useful. Expanded my knowledge on responsive approaches. I spent quite a bit of time testing out how ch units work in reality. I discovered if you apply them on an element with a font-size they will utilise browser default 16px and the font-specific char '0' width. If you want ch to be responsive you should apply a font size to the same element you apply the ch measure too.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- Website - [Alexander Roan](https://www.alexroan.com)
+- Frontend Mentor - [@dearestalexander](https://www.frontendmentor.io/profile/dearestalexander)
+- Twitter - [@xander_roan](https://x.com/xander_roan)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+Thanks to everyone at FrontendMentor.
