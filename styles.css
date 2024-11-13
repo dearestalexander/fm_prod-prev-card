@@ -130,6 +130,11 @@ body {
   color: var(--color__text--medium);
 }
 
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
 /* == Re-usable block styles == */
 .flex {
   display: flex;
@@ -141,7 +146,8 @@ body {
 /* == Unique block styles == */
 .product {
   max-width: 95vw;
-  margin: auto;
+  margin-top: auto;
+  margin-bottom: auto;
   max-width: min(calc(var(--content__width--mobile) + (var(--content__padding--mobile) * 2)), 95vw);
   border-radius: 10px;
   overflow: hidden;
@@ -215,6 +221,7 @@ body {
 }
 
 .attribution {
+  margin-top: auto;
   font-size: 11px; 
   text-align: center; 
 }
@@ -223,13 +230,72 @@ body {
   color: hsl(228, 45%, 44%); 
 }
 
+/* ============================== */
+/* ------- Ichigo Design -------- */
+/* ============================== */
+
+.ichigo-body {
+  font-family: "Noto sans";
+  background-color: black;
+}
+
+.ichigo--product {
+  border-radius: 0;
+}
+
+.ichigo--picture {
+    position: relative;
+    background-color: #f88d2a;
+}
+
+.ichigo--kurasaki {
+  position: absolute;
+  width: 1ch;
+  word-break: break-all;
+  font-family: "Abril Fatface";
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+  background-color: #1335a9;
+  padding: 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.ichigo--product__details {
+  background-color: white;
+}
+
+.ichigo--attributes {
+  margin: 1rem 0;
+}
+
+.ichigo--attribute {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  padding: 0.2em;
+}
+
+.ichigo--ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ichigo--btn {
+  background-color: #1335a9;
+  border-radius: 0;
+}
+
 /* ========================================= */
 /* ------- Adjust for large screens -------- */
 /* ========================================= */
 
 @media (min-width: 48rem) {
   .product {
-    display: flex;
     flex-direction: row;
     align-items: stretch;
     max-width: calc((var(--content__width--desktop) + (var(--content__padding--desktop) * 2)) * 2);
@@ -251,4 +317,10 @@ body {
     height: 100%;
     padding: var(--content__padding--desktop);
   }
+
+  .ichigo--kurasaki {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  
 }
