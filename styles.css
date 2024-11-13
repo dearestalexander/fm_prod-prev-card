@@ -290,6 +290,11 @@ body {
   border-radius: 0;
 }
 
+.ichigo--btn:hover {
+  background-color: black;
+  border-radius: 0;
+}
+
 /* ========================================= */
 /* ------- Adjust for large screens -------- */
 /* ========================================= */
