@@ -29,8 +29,10 @@ Users should be able to:
 
 ### Screenshot
 
-![Desktop](./design/results-desktop.png)
-![Desktop](./design/results-mobile.png)
+![Specification design for desktop](./design/Screenshot-Desktop-Parfum.png)
+![Specification design for mobile](./design/Screenshot-Mobile-Parfum.png)
+![Bleach Ichigo theme design for desktop](./design/Screenshot-Desktop-Ichigo.png)
+![Bleach Ichigo theme design for mobile](./design/Screenshot-Mobile-Ichigo.png)
 
 ### Links
 
